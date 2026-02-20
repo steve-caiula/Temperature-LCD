@@ -16,16 +16,15 @@ volatile DisplayState unit_measure = CELSIUS; // FSM state
 
 // --- get_millis FUNCTION ---
 
-/* 
-   Returns the current millisecond count with atomic access.
-   Since the AVR is an 8-bit architecture, reading a 32-bit variable (4 bytes)
-   takes multiple CPU cycles. This function disables interrupts during the read
-   to prevent the timer from updating the value mid-access, which would
-   result in data corruption.
-*/
-
 uint32_t get_millis (void)
 {
+    /* 
+       Returns the current millisecond count with atomic access.
+       Since the AVR is an 8-bit architecture, reading a 32-bit variable (4 bytes)
+       takes multiple CPU cycles. This function disables interrupts during the read
+       to prevent the timer from updating the value mid-access, which would
+       result in data corruption.
+    */
     uint32_t ms_copy;        // Temporary variable
 
     cli ();                  // Disable interrupts to protect the 32-bit read
