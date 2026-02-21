@@ -4,6 +4,7 @@
 #include <stdint.h>
 #include "pin_definitions.h"
 #include "fsm_states.h"
+#include "temp_sensor.h"
 
 
 
@@ -101,6 +102,8 @@ int main (void)
 
     while (1)
     {
+        int16_t raw_temperature = get_raw_temperature ();
+        float temp_celsius = convert_to_celsius (raw_temperature);
 
         switch (unit_measure) 
         {

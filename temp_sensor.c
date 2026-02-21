@@ -1,16 +1,15 @@
 #include <avr/io.h>
-#include <avr/interrupt.h>
 #include <stdint.h>
+#include <avr/interrupt.h>
 #include <util/delay.h>
+#include "temp_sensor.h"
 #include "pin_definitions.h"
-
-#define SKIP_ROM 0xCC
-#define CONVERT_T 0X44
-#define READ_SCRATCHPAD 0xBE
 
 uint8_t sensor_reset (void)
 {
     uint8_t detected = 0;
+
+    cli (); // Critical Section Start: Disable interrupts to protect 1-Wire timing
 
     // --- PHASE 1: MASTER TRANSMITS RESET PULSE ---
 
@@ -38,7 +37,7 @@ uint8_t sensor_reset (void)
 
     if (!(PIND & (1 << TEMP_SENSOR))) 
     {
-        detected = 1;            // Sensor pulled the bus LOW (Presence Pulse found)
+        detected = 1; // Sensor pulled the bus LOW (Presence Pulse found)
     }
 
     /* 
@@ -46,9 +45,11 @@ uint8_t sensor_reset (void)
        This ensures the sensor has finished its presence pulse (max 240us)
        and the bus has stabilized before the next communication starts.
     */
-    _delay_us (410);          
+    _delay_us (410);  
+    
+    sei ();          // Critical Section End: Re-enable interrupts
 
-    return detected;            // Return 1 if the sensor is detected, 0 otherwise
+    return detected; // Return 1 if the sensor is detected, 0 otherwise
 }
 
 
@@ -56,6 +57,8 @@ uint8_t sensor_reset (void)
 
 static void sensor_write_bit (uint8_t bit_value)
 {
+    cli (); // Atomic Block Start: Prevent interrupt interference during write slot
+    
     // Every write slot starts by pulling the bus LOW
     DDRD |= (1 << TEMP_SENSOR);    // Set pin as output
     PORTD &= ~(1 << TEMP_SENSOR);  // Pull bus LOW
@@ -89,6 +92,8 @@ static void sensor_write_bit (uint8_t bit_value)
         _delay_us (5);            // Recovery time
     }
 
+    sei (); // Atomic Block End
+
     /* 
        Global recovery time: The dasheet states that the sensor needs a
        minimum of a 1us recovery time between individual write slots.
@@ -115,6 +120,8 @@ static void sensor_write_byte (uint8_t data)
 static uint8_t sensor_read_bit (void)
 {
     uint8_t bit_value = 0;
+
+    cli (); // Atomic Block Start: Protect the timing-sensitive sampling window
 
     /* 
        Every read slot is initiated by the master pulling the bus LOW 
@@ -160,6 +167,8 @@ static uint8_t sensor_read_bit (void)
     _delay_us (50);
 
 
+
+    sei (); // Atomic Block End
 
     /* 
        Global recovery time: The datasheet states a minimum of 1us 
