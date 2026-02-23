@@ -15,7 +15,7 @@ CFLAGS = -Wall -Os -mmcu=$(MCU) -DF_CPU=$(F_CPU) -Iinclude
 
 # --- SOURCE FILES ---
 # We specify the path for each .c file inside the src/ folder
-SRCS = src/main.c src/lcd.c src/temp_sensor.c
+SRCS = src/main.c src/lcd.c src/temp_sensor.c src/mcu_timer.c src/button.c
 
 # --- MAIN TARGETS ---
 all: main.hex main.bin

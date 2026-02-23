@@ -8,56 +8,7 @@
 #include "fsm_states.h"
 #include "temp_sensor.h"
 #include "lcd.h"
-
-
-
-// --- GLOBAL VARIABLES ---
-
-volatile uint32_t system_millis = 0;          // Global millisecond counter updated by TIMER0
-volatile DisplayState unit_measure = CELSIUS; // FSM state
-
-
-
-// --- get_millis FUNCTION ---
-
-uint32_t get_millis (void)
-{
-    /* 
-       Returns the current millisecond count with atomic access.
-       Since the AVR is an 8-bit architecture, reading a 32-bit variable (4 bytes)
-       takes multiple CPU cycles. This function disables interrupts during the read
-       to prevent the timer from updating the value mid-access, which would
-       result in data corruption.
-    */
-    uint32_t ms_copy;        // Temporary variable
-
-    cli ();                  // Disable interrupts to protect the 32-bit read
-    ms_copy = system_millis; // Copy system_millis to a local variable while interrupts are disabled
-    sei ();                  // Re-enable interrupts immediately after
-    return ms_copy;          // Return the protected copy
-}
-
-
-
-// ---- ISR ----
-
-ISR (INT0_vect)
-{
-    static uint32_t last_interrupt_time = 0; // Timestamp of the last valid button press (for debouncing) 
-    uint32_t current_time = system_millis;   // Current time
-
-    // Debounce management (200 millis)
-    if (current_time - last_interrupt_time > 200)
-    {
-        unit_measure = (unit_measure + 1) % TOTAL_STATES; // Change FSM state
-        last_interrupt_time = current_time;               // Update last button pressure time
-    }
-}
-
-ISR (TIMER0_COMPA_vect)
-{
-    system_millis++; // + 1 millis
-}
+#include "button.h"
 
 
 
@@ -107,8 +58,8 @@ int main (void)
     {
         int16_t raw_temperature = get_raw_temperature ();
         float temp_celsius = convert_to_celsius (raw_temperature);
-        float temp_fahrenheit = convert_to_fahrenheit(temp_celsius);
-        float temp_kelvin = convert_to_kelvin(temp_celsius);
+        float temp_fahrenheit = convert_to_fahrenheit (temp_celsius);
+        float temp_kelvin = convert_to_kelvin (temp_celsius);
         char temp_string[10];
 
         lcd_set_cursor (0, 0);
