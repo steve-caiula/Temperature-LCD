@@ -5,9 +5,9 @@
 
 // --- DS18B20 PROTOCOL COMMANDS ---
 
-#define SKIP_ROM 0xCC
-#define CONVERT_T 0X44
-#define READ_SCRATCHPAD 0xBE
+#define TEMP_SKIP_ROM        0xCC
+#define TEMP_CONVERT_T       0X44
+#define TEMP_READ_SCRATCHPAD 0xBE
 
 
 

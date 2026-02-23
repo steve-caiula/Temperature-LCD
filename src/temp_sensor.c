@@ -4,6 +4,10 @@
 #include <util/delay.h>
 #include "temp_sensor.h"
 #include "pin_definitions.h"
+#include "lcd.h"
+
+
+
 
 uint8_t sensor_reset (void)
 {
@@ -38,6 +42,11 @@ uint8_t sensor_reset (void)
     if (!(PIND & (1 << TEMP_SENSOR))) 
     {
         detected = 1; // Sensor pulled the bus LOW (Presence Pulse found)
+    }
+
+    else 
+    {
+        lcd_send_byte(LCD_CLEAR_DISPLAY, LCD_COMMAND); // LCD clear if sensor not detected
     }
 
     /* 
@@ -214,8 +223,8 @@ int16_t get_raw_temperature (void)
        devices on the bus simultaneously (efficient for single-sensor setups).
     */
     sensor_reset ();
-    sensor_write_byte (SKIP_ROM);
-    sensor_write_byte (CONVERT_T);
+    sensor_write_byte (TEMP_SKIP_ROM);
+    sensor_write_byte (TEMP_CONVERT_T);
 
 
 
@@ -233,8 +242,8 @@ int16_t get_raw_temperature (void)
        Read Scratchpad [BEh] command to access the stored data.
     */
     sensor_reset ();
-    sensor_write_byte (SKIP_ROM);
-    sensor_write_byte (READ_SCRATCHPAD);
+    sensor_write_byte (TEMP_SKIP_ROM);
+    sensor_write_byte (TEMP_READ_SCRATCHPAD);
     
     
     
