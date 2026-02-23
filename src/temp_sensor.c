@@ -5,6 +5,7 @@
 #include "temp_sensor.h"
 #include "pin_definitions.h"
 #include "lcd.h"
+#include "mcu_timer.h"
 
 
 
@@ -217,53 +218,53 @@ static uint8_t sensor_read_byte (void)
 
 int16_t get_raw_temperature (void)
 {
-    /* 
-       To initiate a temperature measurement, the Master must issue a 
-       Convert T [44h] command. We use SKIP_ROM [CCh] to address all 
-       devices on the bus simultaneously (efficient for single-sensor setups).
+    // Persistent variables to track state across function calls
+    static uint32_t last_conversion_start = 0;
+    static int16_t raw_temperature = 0;
+    static uint8_t conversion_in_progress = 0;
+    
+    uint32_t current_time = system_millis;
+
+    /* STATE 1: Start conversion.
+       If no conversion is currently running, we trigger the DS18B20 to start
+       calculating the temperature. This is a non-blocking request.
     */
-    sensor_reset ();
-    sensor_write_byte (TEMP_SKIP_ROM);
-    sensor_write_byte (TEMP_CONVERT_T);
+    if (!conversion_in_progress) 
+    {
+        sensor_reset();
+        sensor_write_byte(TEMP_SKIP_ROM);
+        sensor_write_byte(TEMP_CONVERT_T);
+        
+        last_conversion_start = current_time;
+        conversion_in_progress = 1;
+    }
 
-
-
-    /* 
-       The DS18B20 requires a maximum conversion time (TCONV) of 750ms 
-       when operating at 12-bit resolution. During this time, the digital 
-       thermal value is calculated and stored in the internal Scratchpad.
+    /* STATE 2: Wait for conversion and read data.
+       The DS18B20 needs up to 750ms for a 12-bit conversion. We check if 
+       enough time has passed without blocking the execution of the main loop.
     */
-    _delay_ms (750);
+    if (conversion_in_progress && (current_time - last_conversion_start >= 750)) 
+    {
+        // Once 750ms have passed, the data is ready in the Scratchpad
+        sensor_reset();
+        sensor_write_byte(TEMP_SKIP_ROM);
+        sensor_write_byte(TEMP_READ_SCRATCHPAD);
+        
+        uint8_t lsb = sensor_read_byte();
+        uint8_t msb = sensor_read_byte();
+        
+        // Combine bytes into the static raw value
+        raw_temperature = (msb << 8) | lsb;
+        
+        // Reset flag to allow a new conversion cycle in the next call
+        conversion_in_progress = 0; 
+    }
 
-    
-    
-    /* 
-       After conversion, we must reset the bus and issue the 
-       Read Scratchpad [BEh] command to access the stored data.
+    /* Return the last valid temperature reading.
+       While a conversion is in progress, this function returns the 
+       previous value, ensuring the display remains stable and the 
+       system stays responsive.
     */
-    sensor_reset ();
-    sensor_write_byte (TEMP_SKIP_ROM);
-    sensor_write_byte (TEMP_READ_SCRATCHPAD);
-    
-    
-    
-    /* 
-       The DS18B20 stores the temperature in the first two bytes of its 
-       internal memory (Scratchpad). We read the Least Significant Byte 
-       first, followed by the Most Significant Byte.
-    */
-    uint8_t lsb = sensor_read_byte ();
-    uint8_t msb = sensor_read_byte ();
-
-    
-    
-    /* 
-       We combine the two 8-bit values into a single 16-bit signed integer (int16_t).
-       This automatically handles the sign bits provided by the sensor,
-       allowing the correct representation of temperatures below 0°C.
-    */
-    int16_t raw_temperature = (msb << 8) | lsb;
-
     return raw_temperature;
 }
 
