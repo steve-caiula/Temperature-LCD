@@ -3,6 +3,12 @@
 
 #include <stdint.h>
 
+// --- ERROR VALUE ---
+
+#define TEMP_SENSOR_ERROR INT16_MIN
+
+
+
 // --- DS18B20 PROTOCOL COMMANDS ---
 
 #define TEMP_SKIP_ROM        0xCC

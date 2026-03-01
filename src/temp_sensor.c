@@ -4,7 +4,6 @@
 #include <util/delay.h>
 #include "temp_sensor.h"
 #include "pin_definitions.h"
-#include "lcd.h"
 #include "mcu_timer.h"
 
 
@@ -47,7 +46,7 @@ uint8_t sensor_reset (void)
 
     else 
     {
-        lcd_send_byte(LCD_CLEAR_DISPLAY, LCD_COMMAND); // LCD clear if sensor not detected
+        detected = 0;
     }
 
     /* 
@@ -223,7 +222,7 @@ int16_t get_raw_temperature (void)
     static int16_t raw_temperature = 0;
     static uint8_t conversion_in_progress = 0;
     
-    uint32_t current_time = system_millis;
+    uint32_t current_time = get_millis ();
 
     /* STATE 1: Start conversion.
        If no conversion is currently running, we trigger the DS18B20 to start
@@ -231,7 +230,12 @@ int16_t get_raw_temperature (void)
     */
     if (!conversion_in_progress) 
     {
-        sensor_reset();
+        // If sensor not detected return TEMP_SENSOR_ERROR
+        if (sensor_reset() == 0)
+        {
+            return TEMP_SENSOR_ERROR;
+        }
+
         sensor_write_byte(TEMP_SKIP_ROM);
         sensor_write_byte(TEMP_CONVERT_T);
         
@@ -245,8 +249,15 @@ int16_t get_raw_temperature (void)
     */
     if (conversion_in_progress && (current_time - last_conversion_start >= 750)) 
     {
-        // Once 750ms have passed, the data is ready in the Scratchpad
-        sensor_reset();
+        /* Once 750ms have passed, the data is ready in the Scratchpad.
+           If sensor not detected return TEMP_SENSOR_ERROR
+        */
+        if (sensor_reset() == 0)
+        {
+        conversion_in_progress = 0;
+        return TEMP_SENSOR_ERROR;
+        }
+
         sensor_write_byte(TEMP_SKIP_ROM);
         sensor_write_byte(TEMP_READ_SCRATCHPAD);
         
@@ -263,7 +274,7 @@ int16_t get_raw_temperature (void)
     /* Return the last valid temperature reading.
        While a conversion is in progress, this function returns the 
        previous value, ensuring the display remains stable and the 
-       system stays responsive.
+       system stays responsive
     */
     return raw_temperature;
 }

@@ -1,4 +1,5 @@
 # --- PROJECT PARAMETERS ---
+# Linux default. macOS: /dev/cu.usbmodem* | Windows: change PORT to COMx
 MCU   = atmega328p
 F_CPU = 16000000UL
 BAUD  = 115200
@@ -37,6 +38,7 @@ flash: main.hex
 	$(AVRDUDE) -v -p $(MCU) -c arduino -P $(PORT) -b $(BAUD) -U flash:w:main.hex:i
 
 # --- CLEANUP ---
-# Using 'rm -f' for Linux environments
+# Using 'rm -f' for Linux and MacOS environments
+# Windows: change 'rm -f' to 'del' in clean target
 clean:
 	rm -f main.elf main.hex main.bin

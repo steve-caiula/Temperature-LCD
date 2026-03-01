@@ -15,7 +15,7 @@ ISR (INT0_vect)
     // Debounce management (200 millis)
     if (current_time - last_interrupt_time > 200)
     {
-        unit_measure = (unit_measure + 1) % (TOTAL_STATES); // Change FSM state
-        last_interrupt_time = current_time;                 // Update last button pressure time
+        unit_measure = (unit_measure + 1) % (DISPLAY_STATES); // Change FSM dispaly state (°C, °F, K)
+        last_interrupt_time = current_time;                   // Update last button pressure time
     }
 }

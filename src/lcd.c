@@ -14,9 +14,9 @@ static void lcd_enable_pulse (void)
    */
    PORTB |= (1 << LCD_E);  // Set Enable HIGH to initiate the pulse
     
-   /* Enable Pulse Width (tPWEH): The datasheet requires a minimum HIGH 
-      time of 450ns. A 1us delay ensures compatibility even with 
-      slower controller clones or long breadboard wires.
+   /* Enable Pulse Width (tPW): The datasheet requires a minimum HIGH 
+   time of 150ns. A 1us delay ensures compatibility even with 
+   slower controllers or long breadboard wires.
    */
    _delay_us(1); 
 
@@ -94,7 +94,7 @@ void lcd_initialization (void)
 {
    /* Step 1: Power-On Delay.
       Wait for the power supply (VCC) to stabilize. The datasheet requires 
-      at least 15ms after VCC rises to 4.5V. A 50ms delay provides a robust 
+      at least 15ms after VCC rises to 4.5V. A 20ms delay provides a robust 
       safety margin for the hardware to settle.
    */
    _delay_ms (20);

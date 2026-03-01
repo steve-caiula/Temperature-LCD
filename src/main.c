@@ -3,7 +3,6 @@
 #include <util/delay.h>
 #include <stdint.h>
 #include <stdlib.h>
-#include "lcd.h"
 #include "pin_definitions.h"
 #include "fsm_states.h"
 #include "temp_sensor.h"
@@ -57,17 +56,37 @@ int main (void)
     while (1)
     {
         int16_t raw_temperature = get_raw_temperature ();
-        float temp_celsius = convert_to_celsius (raw_temperature);
-        float temp_fahrenheit = convert_to_fahrenheit (temp_celsius);
-        float temp_kelvin = convert_to_kelvin (temp_celsius);
-        char temp_string[10];
+        float temp_celsius = 0.0;
+        float temp_fahrenheit = 0.0;
+        float temp_kelvin = 0.0;
+        char temp_string[10]; // In this string is saved the temperature value to avoid further conversions
 
-        lcd_set_cursor (0, 0);
-        lcd_print ("Temp: ");
+        // Show ERROR warning incase of sensor's disconnection or malfunction (sensor not detected)
+        if (raw_temperature == TEMP_SENSOR_ERROR) 
+        {
+            unit_measure = SENSOR_ERROR;
+        }
+
+        // Restore CELSIUS state when the sensor is detected and calculate temperature
+        else 
+        {
+            if (unit_measure == SENSOR_ERROR)
+            {
+                lcd_send_byte (LCD_CLEAR_DISPLAY, LCD_COMMAND);
+                _delay_ms(2);
+                unit_measure = CELSIUS;
+            }
+
+            temp_celsius = convert_to_celsius (raw_temperature);
+            temp_fahrenheit = convert_to_fahrenheit (temp_celsius);
+            temp_kelvin = convert_to_kelvin (temp_celsius);
+        }
 
         switch (unit_measure) 
         {
             case CELSIUS:
+            lcd_set_cursor (0, 0);
+            lcd_print ("Temp: ");
             dtostrf (temp_celsius, 4, 2, temp_string); 
             lcd_print (temp_string);
             lcd_send_byte (LCD_DEGREE_SYMBOL, LCD_DATA); // Print degree symbol '°'
@@ -75,6 +94,8 @@ int main (void)
             break;
 
             case FAHRENHEIT:
+            lcd_set_cursor (0, 0);
+            lcd_print ("Temp: ");
             dtostrf (temp_fahrenheit, 4, 2, temp_string); 
             lcd_print (temp_string);
             lcd_send_byte (LCD_DEGREE_SYMBOL, LCD_DATA); // Print degree symbol '°'
@@ -82,13 +103,18 @@ int main (void)
             break;
 
             case KELVIN:
+            lcd_set_cursor (0, 0);
+            lcd_print ("Temp: ");
             dtostrf (temp_kelvin, 4, 2, temp_string); 
             lcd_print (temp_string);
             lcd_print (" K  ");
             break;
 
-            default:
-            lcd_print ("ERROR");
+            case SENSOR_ERROR:
+            lcd_set_cursor (0, 0);
+            lcd_print ("ERROR          ");
+            lcd_set_cursor (1, 0);
+            lcd_print ("TEMP SENSOR    ");
             break;
         }
     }

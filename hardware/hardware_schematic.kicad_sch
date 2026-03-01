@@ -674,23 +674,20 @@
   (junction (at 120.65 157.48) (diameter 0) (color 0 0 0 0)
     (uuid 2480976b-70bf-4912-acf1-9eeb4f5d7347)
   )
-  (junction (at 261.62 157.48) (diameter 0) (color 0 0 0 0)
-    (uuid 2d5c4703-caf9-4fc2-88f7-2f5642f8bcd6)
-  )
   (junction (at 271.78 20.32) (diameter 0) (color 0 0 0 0)
     (uuid 3385d8eb-d7f6-488b-880f-7b0cb23517f8)
   )
   (junction (at 261.62 20.32) (diameter 0) (color 0 0 0 0)
     (uuid 34aeb4a6-ad55-4243-9429-d8936e451f45)
   )
-  (junction (at 240.03 63.5) (diameter 0) (color 0 0 0 0)
-    (uuid 43eb83f5-8ca0-4d3d-8679-b91952362cf2)
-  )
   (junction (at 156.21 20.32) (diameter 0) (color 0 0 0 0)
     (uuid 536b27dd-a5f0-41ad-9a5a-bee6e16e252c)
   )
   (junction (at 120.65 100.33) (diameter 0) (color 0 0 0 0)
     (uuid 730ca248-31aa-4841-a554-628621453428)
+  )
+  (junction (at 261.62 157.48) (diameter 0) (color 0 0 0 0)
+    (uuid c1f836e2-9369-41f8-9d5c-0a061332a0f7)
   )
   (junction (at 214.63 20.32) (diameter 0) (color 0 0 0 0)
     (uuid cf5be6ce-fda8-48c7-b6ff-da038a7dc39c)
@@ -700,6 +697,9 @@
   )
   (junction (at 41.91 52.07) (diameter 0) (color 0 0 0 0)
     (uuid f83a1807-f844-48ff-b5c1-ec23961691b4)
+  )
+  (junction (at 250.19 52.07) (diameter 0) (color 0 0 0 0)
+    (uuid fa4419d7-129e-4ad8-a23b-b81a022b4f5d)
   )
 
   (no_connect (at 220.98 62.23) (uuid 09497859-9869-49e8-82af-4eb8a6eae88d))
@@ -732,10 +732,6 @@
   (no_connect (at 44.45 57.15) (uuid f066164f-f8db-4bcb-8bc2-92c28e57c1cc))
   (no_connect (at 220.98 64.77) (uuid feae72ad-ab62-4f12-95a5-85175aeb3886))
 
-  (wire (pts (xy 260.35 64.77) (xy 261.62 64.77))
-    (stroke (width 0) (type default))
-    (uuid 0894691d-fe43-4c67-af7e-d23441b4f988)
-  )
   (wire (pts (xy 54.61 69.85) (xy 220.98 69.85))
     (stroke (width 0) (type default))
     (uuid 0b6a3bba-fb08-46ff-b8fe-4dca2cb60b2a)
@@ -756,9 +752,21 @@
     (stroke (width 0) (type default))
     (uuid 127bbc32-83ac-4624-a50f-73e1905136f5)
   )
+  (wire (pts (xy 261.62 52.07) (xy 260.35 52.07))
+    (stroke (width 0) (type default))
+    (uuid 1ce6347d-110a-41c6-a180-989262afc24e)
+  )
   (wire (pts (xy 156.21 143.51) (xy 172.72 143.51))
     (stroke (width 0) (type default))
     (uuid 20f25941-683e-4390-863d-ea18d7412efe)
+  )
+  (wire (pts (xy 250.19 52.07) (xy 252.73 52.07))
+    (stroke (width 0) (type default))
+    (uuid 21d8fe7a-5e69-4d3f-a6f3-f4a0952d6083)
+  )
+  (wire (pts (xy 241.3 52.07) (xy 250.19 52.07))
+    (stroke (width 0) (type default))
+    (uuid 2350efd5-37f0-4180-a193-c7eeb414bf10)
   )
   (wire (pts (xy 156.21 20.32) (xy 156.21 85.09))
     (stroke (width 0) (type default))
@@ -768,10 +776,6 @@
     (stroke (width 0) (type default))
     (uuid 317f8c8f-6dea-429f-a22c-7543cb7e8ad2)
   )
-  (wire (pts (xy 241.3 52.07) (xy 240.03 52.07))
-    (stroke (width 0) (type default))
-    (uuid 31e4f99c-633d-4b10-9aeb-aea967950f0e)
-  )
   (wire (pts (xy 180.34 143.51) (xy 199.39 143.51))
     (stroke (width 0) (type default))
     (uuid 352acfe7-ad0d-4e19-86e1-8664e37cabb7)
@@ -779,6 +783,10 @@
   (wire (pts (xy 54.61 72.39) (xy 220.98 72.39))
     (stroke (width 0) (type default))
     (uuid 3ece5db8-7b95-4ba0-9209-90b7cdf82ec1)
+  )
+  (wire (pts (xy 207.01 157.48) (xy 261.62 157.48))
+    (stroke (width 0) (type default))
+    (uuid 3f740646-b5b7-47ac-b0dc-ed39f82b2216)
   )
   (wire (pts (xy 54.61 77.47) (xy 123.19 77.47))
     (stroke (width 0) (type default))
@@ -791,10 +799,6 @@
   (wire (pts (xy 220.98 46.99) (xy 214.63 46.99))
     (stroke (width 0) (type default))
     (uuid 5cecfb0c-bd7a-44ea-94c3-8190b4f62a89)
-  )
-  (wire (pts (xy 240.03 64.77) (xy 252.73 64.77))
-    (stroke (width 0) (type default))
-    (uuid 5eb2eed5-6f23-4364-9ed2-ac5402cbde46)
   )
   (wire (pts (xy 214.63 46.99) (xy 214.63 20.32))
     (stroke (width 0) (type default))
@@ -827,10 +831,6 @@
   (wire (pts (xy 128.27 49.53) (xy 220.98 49.53))
     (stroke (width 0) (type default))
     (uuid 7f5f06cd-c308-4604-88a2-1356ffa7c1fe)
-  )
-  (wire (pts (xy 240.03 63.5) (xy 240.03 64.77))
-    (stroke (width 0) (type default))
-    (uuid 8245666f-4c3a-4be1-a571-c58adc3cbfd9)
   )
   (wire (pts (xy 120.65 100.33) (xy 156.21 100.33))
     (stroke (width 0) (type default))
@@ -871,10 +871,6 @@
   (wire (pts (xy 207.01 39.37) (xy 207.01 157.48))
     (stroke (width 0) (type default))
     (uuid b1494f79-6c98-47b4-954d-62f978b1b8ac)
-  )
-  (wire (pts (xy 261.62 157.48) (xy 275.59 157.48))
-    (stroke (width 0) (type default))
-    (uuid b31ee774-2049-4366-a788-77faa15ac495)
   )
   (wire (pts (xy 120.65 92.71) (xy 148.59 92.71))
     (stroke (width 0) (type default))
@@ -920,7 +916,7 @@
     (stroke (width 0) (type default))
     (uuid e3dc3934-46d4-43f8-ad1b-300eb8dec0b9)
   )
-  (wire (pts (xy 261.62 64.77) (xy 261.62 157.48))
+  (wire (pts (xy 261.62 52.07) (xy 261.62 157.48))
     (stroke (width 0) (type default))
     (uuid e467a835-acdb-4fca-b0cd-26e021612fef)
   )
@@ -928,17 +924,13 @@
     (stroke (width 0) (type default))
     (uuid e8b3a76d-49a4-4179-bd14-e568a6455c25)
   )
-  (wire (pts (xy 240.03 52.07) (xy 240.03 63.5))
-    (stroke (width 0) (type default))
-    (uuid e9798cbc-ff6e-4f53-88ff-d198de33722d)
-  )
-  (wire (pts (xy 207.01 157.48) (xy 261.62 157.48))
-    (stroke (width 0) (type default))
-    (uuid ede53444-c4d7-4bad-b371-8dd2d2af7abe)
-  )
   (wire (pts (xy 41.91 52.07) (xy 41.91 57.15))
     (stroke (width 0) (type default))
     (uuid f3e315dd-fab6-407d-aceb-7442f0afa130)
+  )
+  (wire (pts (xy 261.62 157.48) (xy 275.59 157.48))
+    (stroke (width 0) (type default))
+    (uuid fb6bdadc-be42-45d4-bced-09ea8bd9fe4b)
   )
   (wire (pts (xy 36.83 157.48) (xy 120.65 157.48))
     (stroke (width 0) (type default))
@@ -963,9 +955,34 @@
     (pin "2" (uuid 1b06c130-b3a0-4c1b-98e1-eaa9b72d0aa5))
     (pin "1" (uuid 49369b30-3a20-4a3c-bd85-290cdef81eb9))
     (instances
-      (project "Temperature-LCD-CAD"
+      (project "hardware_schematic"
         (path "/8a4cbf0c-4d35-400e-9ed6-c731e4b6300a"
           (reference "R2") (unit 1)
+        )
+      )
+    )
+  )
+
+  (symbol (lib_id "power:PWR_FLAG") (at 250.19 52.07 0) (unit 1)
+    (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
+    (uuid 157ae995-3f99-487b-bf90-1ce1e060c080)
+    (property "Reference" "#FLG02" (at 250.19 50.165 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "Value" "PWR_FLAG" (at 250.19 46.99 0)
+      (effects (font (size 1.27 1.27)))
+    )
+    (property "Footprint" "" (at 250.19 52.07 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "Datasheet" "~" (at 250.19 52.07 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (pin "1" (uuid 315f00f1-406a-4a9b-b058-30c40a50514f))
+    (instances
+      (project "hardware_schematic"
+        (path "/8a4cbf0c-4d35-400e-9ed6-c731e4b6300a"
+          (reference "#FLG02") (unit 1)
         )
       )
     )
@@ -988,7 +1005,7 @@
     )
     (pin "1" (uuid ceaf89bb-ba70-4cf0-a6b5-d455729e146e))
     (instances
-      (project "Temperature-LCD-CAD"
+      (project "hardware_schematic"
         (path "/8a4cbf0c-4d35-400e-9ed6-c731e4b6300a"
           (reference "#PWR02") (unit 1)
         )
@@ -1014,34 +1031,9 @@
     (pin "2" (uuid 91dcd7b5-c51f-4eee-a040-dde470f6119d))
     (pin "1" (uuid ddfa2537-632d-44db-bbee-2f9f7dac016a))
     (instances
-      (project "Temperature-LCD-CAD"
+      (project "hardware_schematic"
         (path "/8a4cbf0c-4d35-400e-9ed6-c731e4b6300a"
           (reference "R1") (unit 1)
-        )
-      )
-    )
-  )
-
-  (symbol (lib_id "power:PWR_FLAG") (at 240.03 63.5 0) (unit 1)
-    (in_bom yes) (on_board yes) (dnp no)
-    (uuid 5f64695a-3934-464a-ae71-3e2bd63827cd)
-    (property "Reference" "#FLG02" (at 240.03 61.595 0)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (property "Value" "PWR_FLAG" (at 240.03 59.69 0)
-      (effects (font (size 1.27 1.27)))
-    )
-    (property "Footprint" "" (at 240.03 63.5 0)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (property "Datasheet" "~" (at 240.03 63.5 0)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (pin "1" (uuid b468a17f-3e05-4d82-8e5c-05f8f4b9ab95))
-    (instances
-      (project "Temperature-LCD-CAD"
-        (path "/8a4cbf0c-4d35-400e-9ed6-c731e4b6300a"
-          (reference "#FLG02") (unit 1)
         )
       )
     )
@@ -1065,7 +1057,7 @@
     (pin "1" (uuid 92ee38cc-45e2-4cd5-888f-26a63a830f81))
     (pin "2" (uuid ca614c4e-67aa-43d7-a3b8-6c202aecbe38))
     (instances
-      (project "Temperature-LCD-CAD"
+      (project "hardware_schematic"
         (path "/8a4cbf0c-4d35-400e-9ed6-c731e4b6300a"
           (reference "SW1") (unit 1)
         )
@@ -1091,7 +1083,7 @@
     (pin "1" (uuid 315f014e-2745-469e-bcc2-05dcd3617cdb))
     (pin "2" (uuid 16c96083-de9d-4c93-9d8d-08d73f3d709f))
     (instances
-      (project "Temperature-LCD-CAD"
+      (project "hardware_schematic"
         (path "/8a4cbf0c-4d35-400e-9ed6-c731e4b6300a"
           (reference "R3") (unit 1)
         )
@@ -1099,25 +1091,25 @@
     )
   )
 
-  (symbol (lib_id "Device:R_US") (at 256.54 64.77 90) (unit 1)
+  (symbol (lib_id "Device:R_US") (at 256.54 52.07 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 9e2646fb-459f-45d5-85f3-7cd4910e6197)
-    (property "Reference" "R4" (at 256.54 58.42 90)
+    (property "Reference" "R4" (at 256.54 45.72 90)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (property "Value" "220 Ω" (at 256.54 62.23 90)
+    (property "Value" "220 Ω" (at 256.54 49.53 90)
       (effects (font (size 1.27 1.27)))
     )
-    (property "Footprint" "" (at 256.794 63.754 90)
+    (property "Footprint" "" (at 256.794 51.054 90)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (property "Datasheet" "~" (at 256.54 64.77 0)
+    (property "Datasheet" "~" (at 256.54 52.07 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (pin "1" (uuid ef251a8c-b12f-4d8f-a32e-c1d17066948f))
     (pin "2" (uuid 557e5495-66df-40d0-8526-59a32b1cc230))
     (instances
-      (project "Temperature-LCD-CAD"
+      (project "hardware_schematic"
         (path "/8a4cbf0c-4d35-400e-9ed6-c731e4b6300a"
           (reference "R4") (unit 1)
         )
@@ -1144,7 +1136,7 @@
     (pin "3" (uuid 093f32dd-f663-4820-be9c-95dcf569812d))
     (pin "2" (uuid 20141005-5b89-49db-8b46-03cc8b931340))
     (instances
-      (project "Temperature-LCD-CAD"
+      (project "hardware_schematic"
         (path "/8a4cbf0c-4d35-400e-9ed6-c731e4b6300a"
           (reference "U2") (unit 1)
         )
@@ -1169,7 +1161,7 @@
     )
     (pin "1" (uuid 4037432c-3d4c-4cc8-8593-a63b90433691))
     (instances
-      (project "Temperature-LCD-CAD"
+      (project "hardware_schematic"
         (path "/8a4cbf0c-4d35-400e-9ed6-c731e4b6300a"
           (reference "#PWR01") (unit 1)
         )
@@ -1178,12 +1170,12 @@
   )
 
   (symbol (lib_id "Display_Character:LCD-016N002L") (at 231.14 59.69 0) (unit 1)
-    (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
+    (in_bom yes) (on_board yes) (dnp no)
     (uuid e9c27004-c44a-44c8-93a7-419277c4f0ea)
     (property "Reference" "U1" (at 233.3341 36.83 0)
       (effects (font (size 1.27 1.27)) (justify left) hide)
     )
-    (property "Value" "TC1602A-01T" (at 233.3341 39.37 0)
+    (property "Value" "TC1602A-01T" (at 236.22 80.01 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Footprint" "Display:TC1602A-01T" (at 231.648 83.058 0)
@@ -1213,7 +1205,7 @@
     (pin "15" (uuid de40f54c-9773-4a68-8672-b452417449d3))
     (pin "3" (uuid 08b4bbf4-6259-4071-b44c-bd95060c5878))
     (instances
-      (project "Temperature-LCD-CAD"
+      (project "hardware_schematic"
         (path "/8a4cbf0c-4d35-400e-9ed6-c731e4b6300a"
           (reference "U1") (unit 1)
         )
@@ -1238,7 +1230,7 @@
     )
     (pin "1" (uuid f66068f1-b660-4d29-8a97-3c985875d15d))
     (instances
-      (project "Temperature-LCD-CAD"
+      (project "hardware_schematic"
         (path "/8a4cbf0c-4d35-400e-9ed6-c731e4b6300a"
           (reference "#FLG01") (unit 1)
         )
@@ -1294,7 +1286,7 @@
     (pin "32" (uuid 76b863a8-7034-4721-a1b9-e8ed9be13d3f))
     (pin "15" (uuid d4844cd4-cb42-49f8-9c5e-514edbba9753))
     (instances
-      (project "Temperature-LCD-CAD"
+      (project "hardware_schematic"
         (path "/8a4cbf0c-4d35-400e-9ed6-c731e4b6300a"
           (reference "A1") (unit 1)
         )
