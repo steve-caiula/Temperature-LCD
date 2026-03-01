@@ -136,7 +136,7 @@ The following tools are required: `avr-gcc` and `avrdude`.
 
 On Debian-based systems:
 ```bash
-sudo apt install gcc-avr binutils-avr avrdude
+sudo apt install gcc-avr avrdude
 ```
 
 ### Clone and build
