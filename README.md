@@ -132,7 +132,7 @@ iteration.
 The following instructions are tested on Linux. See the Makefile comments for macOS and Windows adjustments.
 
 ### Prerequisites
-The following tools are required: `avr-gcc`, `avr-binutils`, and `avrdude`.
+The following tools are required: `avr-gcc` and `avrdude`.
 
 On Debian-based systems:
 ```bash
