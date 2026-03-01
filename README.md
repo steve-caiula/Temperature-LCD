@@ -146,15 +146,15 @@ cd Temperature-LCD
 make
 ```
 
-To remove build artifacts:
-```bash
-make clean
-```
-
 ### Flash
 Verify that the `PORT` variable in the Makefile matches your system before flashing. Then run:
 ```bash
 make flash
+```
+
+To remove build artifacts:
+```bash
+make clean
 ```
 
 ### Usage
